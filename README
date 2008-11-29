@@ -1,0 +1,35 @@
+MerbRJS
+=======
+
+Merb plugin that enables you to use 'page' object in your controllers like RJS of Rails
+
+
+Example
+=======
+
+app/views/top/index.html.erb :
+  <div id="message"></div>
+  <div id="content"></div>
+  <%= link_to "update", "refresh", :onclick=>"$.getScript(this.href);return false;" %>
+
+app/controllers/top.rb :
+  class Top < Application
+    def refresh
+      page[:message].text Time.now
+      page[:content].html "<font color=red>Updated!</font>"
+      display page
+    end
+  end
+
+http://localhost:4000/top/refresh :
+  $("#message").text("2008-11-30T08:33:12+09:00");
+  $("#content").html("<font color=red>Updated!<\/font>");
+
+
+Install
+=======
+
+  It will be released in a few days!
+
+
+Copyright (c) 2008 maiha@wota.jp, released under the MIT license
